@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Futuro Web IA | Desarrollo de Aplicaciones Web con Inteligencia Artificial</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.1);
+      --text: #eef2ff;
+      --muted: #b6c0e0;
+      --primary: #6ea8fe;
+      --secondary: #8b5cf6;
+      --accent: #22d3ee;
+      --success: #34d399;
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --max-width: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(110, 168, 254, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.14), transparent 25%),
+        linear-gradient(180deg, #0b1020 0%, #0d1327 50%, #0b1020 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 1.05rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(34, 211, 238, 0.12);
+      border: 1px solid rgba(34, 211, 238, 0.24);
+      color: #c8f7ff;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 16, 32, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(110, 168, 254, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: bold;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 14px 34px rgba(110, 168, 254, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(110, 168, 254, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      padding: 0 0 20px;
+    }
+
+    .mobile-menu a {
+      color: var(--muted);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0 60px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .stat-card,
+    .glass-card,
+    .feature-card,
+    .timeline-item,
+    .faq-item,
+    .cta-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 18px;
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .glass-card {
+      padding: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .dashboard {
+      display: grid;
+      gap: 18px;
+    }
+
+    .dashboard-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mini-badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(52, 211, 153, 0.14);
+      color: #bbf7d0;
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      font-size: 0.85rem;
+    }
+
+    .bars {
+      display: grid;
+      gap: 14px;
+    }
+
+    .bar-group span {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-size: 0.92rem;
+    }
+
+    .bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--primary), var(--secondary));
+    }
+
+    .floating-card {
+      position: absolute;
+      right: -20px;
+      bottom: -30px;
+      width: 220px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(11, 16, 32, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: var(--shadow);
+    }
+
+    .floating-card h4 {
+      margin-bottom: 8px;
+    }
+
+    .floating-card p {
+      font-size: 0.92rem;
+      margin: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      padding: 26px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(110, 168, 254, 0.35);
+    }
+
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(110,168,254,0.25), rgba(139,92,246,0.25));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      margin-top: 40px;
+    }
+
+    .skills-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .skills-panel h3 {
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+      margin-top: 40px;
+    }
+
+    .timeline-item {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .timeline-step {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 10px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .timeline-tags span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .cta-box {
+      padding: 40px;
+      margin-top: 36px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top left, rgba(110, 168, 254, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.14), transparent 25%),
+        rgba(255,255,255,0.05);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    .cta-box p {
+      max-width: 760px;
+      margin: 0 auto 26px;
+      color: var(--muted);
+    }
+
+    .faq {
+      margin-top: 40px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .faq-item {
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 22px 24px;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .faq-question span:last-child {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: var(--muted);
+    }
+
+    .faq-answer-content {
+      padding: 0 24px 22px;
+    }
+
+    footer {
+      padding: 30px 0 60px;
+      color: var(--muted);
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .skills,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-card {
+        position: static;
+        width: 100%;
+        margin-top: 18px;
+      }
+
+      .nav-links,
+      .nav-actions .btn-secondary {
+        display: none;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+      }
+
+      .mobile-menu.show {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 72px 0;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .cta-box,
+      .feature-card,
+      .skills-panel,
+      .timeline-item,
+      .glass-card {
+        padding: 22px;
+      }
+
+      .faq-question {
+        padding: 18px 18px;
+      }
+
+      .faq-answer-content {
+        padding: 0 18px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="#inicio" class="logo">
+          <div class="logo-mark">IA</div>
+          <span>Futuro Web IA</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#vision">Visión</a>
+          <a href="#habilidades">Habilidades</a>
+          <a href="#roadmap">Roadmap</a>
+          <a href="#faq">FAQ</a>
+        </div>
+
+        <div class="nav-actions">
+          <a href="#roadmap" class="btn btn-secondary">Explorar</a>
+          <a href="#cta" class="btn btn-primary">Empezar ahora</a>
+          <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+        </div>
+      </nav>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#vision">Visión</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#faq">FAQ</a>
+        <a href="#cta" class="btn btn-primary">Empezar ahora</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="badge">
+            <span class="dot"></span>
+            Nueva era del desarrollo web impulsado por IA
+          </div>
+
+          <h1>
+            Construye tu futuro profesional creando
+            <span style="background: linear-gradient(135deg, var(--accent), var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              aplicaciones web con inteligencia artificial
+            </span>
+          </h1>
+
+          <p>
+            El desarrollador web del futuro no solo programa interfaces y APIs:
+            diseña experiencias inteligentes, automatiza procesos, integra modelos de IA
+            y lidera productos digitales más rápidos, útiles y escalables.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#cta" class="btn btn-primary">Quiero prepararme</a>
+            <a href="#vision" class="btn btn-secondary">Descubrir oportunidades</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div class="stat-number">Frontend + IA</div>
+              <div class="stat-label">Interfaces dinámicas, asistentes, personalización y UX inteligente.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">Backend + IA</div>
+              <div class="stat-label">Integración con APIs, automatización, datos y flujos inteligentes.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">Perfil híbrido</div>
+              <div class="stat-label">Más valor profesional al combinar desarrollo, producto e IA aplicada.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="glass-card dashboard">
+            <div class="dashboard-top">
+              <div>
+                <h3 style="margin-bottom: 6px;">Mapa de crecimiento profesional</h3>
+                <p style="color: var(--muted); margin: 0;">Ruta moderna para desarrolladores web con IA</p>
+              </div>
+              <div class="mini-badge">Alta demanda</div>
+            </div>
+
+            <div class="bars">
+              <div class="bar-group">
+                <span>Desarrollo frontend moderno</span>
+                <div class="bar"><div class="bar-fill" style="width: 92%;"></div></div>
+              </div>
+              <div class="bar-group">
+                <span>Backend y APIs</span>
+                <div class="bar"><div class="bar-fill" style="width: 84%;"></div></div>
+              </div>
+              <div class="bar-group">
+                <span>Integración de modelos de IA</span>
+                <div class="bar"><div class="bar-fill" style="width: 88%;"></div></div>
+              </div>
+              <div class="bar-group">
+                <span>Automatización y productividad</span>
+                <div class="bar"><div class="bar-fill" style="width: 90%;"></div></div>
+              </div>
+              <div class="bar-group">
+                <span>Arquitectura de productos inteligentes</span>
+                <div class="bar"><div class="bar-fill" style="width: 80%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-card">
+            <h4>Perfil del futuro</h4>
+            <p>
+              Quien domine HTML, CSS, JS, frameworks modernos y herramientas de IA
+              tendrá una ventaja diferencial en creación de productos, automatización y empleabilidad.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vision">
+      <div class="container">
+        <div class="badge">
+          <span class="dot"></span>
+          Por qué este perfil importa
+        </div>
+        <h2 class="section-title reveal">La web evoluciona hacia productos más inteligentes, automáticos y personalizados</h2>
+        <p class="section-subtitle reveal">
+          Las empresas buscan desarrolladores capaces de crear aplicaciones que no solo funcionen bien,
+          sino que también comprendan contexto, generen contenido, automaticen tareas y mejoren decisiones
+          mediante IA integrada.
+        </p>
+
+        <div class="grid-3">
+          <article class="feature-card reveal">
+            <div class="icon-box">⚙️</div>
+            <h3>Automatización real</h3>
+            <p>
+              Desarrolla sistemas que reduzcan trabajo manual: generación de texto, análisis de datos,
+              clasificación automática, recomendación de acciones y asistentes internos.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="icon-box">🧠</div>
+            <h3>Productos más inteligentes</h3>
+            <p>
+              Integra capacidades como búsqueda semántica, chat conversacional, personalización y apoyo a decisiones
+              para elevar el valor de cualquier aplicación web.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="icon-box">🚀</div>
+            <h3>Mayor proyección profesional</h3>
+            <p>
+              El desarrollador que combina web + IA se posiciona mejor en roles de innovación, producto digital,
+              automatización, SaaS, consultoría técnica y emprendimiento.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="habilidades">
+      <div class="container">
+        <div class="badge">
+          <span class="dot"></span>
+          Habilidades clave
+        </div>
+        <h2 class="section-title reveal">Qué necesitas dominar para destacar en el desarrollo web con IA</h2>
+        <p class="section-subtitle reveal">
+          No se trata de abandonar la base del desarrollo web, sino de potenciarla con nuevas competencias
+          para construir aplicaciones más útiles, escalables y competitivas.
+        </p>
+
+        <div class="skills">
+          <div class="skills-panel reveal">
+            <h3>Base técnica sólida</h3>
+            <div class="skill-list">
+              <span class="skill-pill">HTML semántico</span>
+              <span class="skill-pill">CSS responsive</span>
+              <span class="skill-pill">JavaScript moderno</span>
+              <span class="skill-pill">Consumo de APIs</span>
+              <span class="skill-pill">Accesibilidad</span>
+              <span class="skill-pill">UX/UI</span>
+              <span class="skill-pill">Git y control de versiones</span>
+              <span class="skill-pill">Arquitectura frontend</span>
+              <span class="skill-pill">Backend básico</span>
+              <span class="skill-pill">Bases de datos</span>
+            </div>
+          </div>
+
+          <div class="skills-panel reveal">
+            <h3>Capacidades diferenciales con IA</h3>
+            <div class="skill-list">
+              <span class="skill-pill">Prompting aplicado</span>
+              <span class="skill-pill">Integración con APIs de IA</span>
+              <span class="skill-pill">Automatización de flujos</span>
+              <span class="skill-pill">Chatbots y asistentes</span>
+              <span class="skill-pill">Búsqueda semántica</span>
+              <span class="skill-pill">Procesamiento de texto</span>
+              <span class="skill-pill">Evaluación de resultados</span>
+              <span class="skill-pill">Seguridad y privacidad</span>
+              <span class="skill-pill">Diseño de producto inteligente</span>
+              <span class="skill-pill">Pensamiento crítico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="container">
+        <div class="badge">
+          <span class="dot"></span>
+          Roadmap profesional
+        </div>
+        <h2 class="section-title reveal">Una ruta clara para convertirte en desarrollador web con enfoque en IA</h2>
+        <p class="section-subtitle reveal">
+          Este camino te ayuda a construir un perfil actualizado, práctico y alineado con las nuevas necesidades
+          del mercado digital.
+        </p>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-step">01</div>
+            <div>
+              <h3>Domina los fundamentos web</h3>
+              <p>
+                Construye una base firme en HTML, CSS y JavaScript. Aprende a crear interfaces limpias,
+                responsive y mantenibles. Entiende cómo funciona la web antes de añadir capas de complejidad.
+              </p>
+              <div class="timeline-tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Responsive Design</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-step">02</div>
+            <div>
+              <h3>Aprende a conectar datos y servicios</h3>
+              <p>
+                Trabaja con APIs, autenticación, formularios, almacenamiento y lógica de negocio.
+                La IA se integra sobre productos funcionales, por eso necesitas saber construir aplicaciones reales.
+              </p>
+              <div class="timeline-tags">
+                <span>APIs REST</span>
+                <span>JSON</span>
+                <span>Fetch</span>
+                <span>Backend</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-step">03</div>
+            <div>
+              <h3>Integra capacidades de inteligencia artificial</h3>
+              <p>
+                Añade generación de contenido, asistentes, clasificación, recomendaciones o automatización
+                usando APIs y servicios de IA. Enfócate siempre en resolver problemas concretos.
+              </p>
+              <div class="timeline-tags">
+                <span>Prompt Engineering</span>
+                <span>LLMs</span>
+                <span>Automatización</span>
+                <span>UX inteligente</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-step">04</div>
+            <div>
+              <h3>Crea proyectos con impacto profesional</h3>
+              <p>
+                Diseña un portafolio con casos prácticos: asistentes web, paneles inteligentes,
+                automatización de procesos o herramientas para negocio. Tu empleabilidad crece con evidencia real.
+              </p>
+              <div class="timeline-tags">
+                <span>Portafolio</span>
+                <span>Casos reales</span>
+                <span>Producto</span>
+                <span>Marca personal</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="cta-box reveal" id="cta">
+          <h2>El mejor momento para preparar tu perfil profesional es ahora</h2>
+          <p>
+            El mercado no solo necesita programadores, sino personas capaces de construir experiencias web
+            más inteligentes, productivas y valiosas. Si unes desarrollo web con IA, te posicionas en una de las áreas con mayor proyección.
+          </p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="#inicio" class="btn btn-primary">Comenzar mi ruta</a>
+            <a href="#faq" class="btn btn-secondary">Resolver dudas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="badge">
+          <span class="dot"></span>
+          Preguntas frecuentes
+        </div>
+        <h2 class="section-title reveal">Dudas comunes sobre el futuro del desarrollo web con IA</h2>
+        <p class="section-subtitle reveal">
+          La IA no reemplaza el valor del desarrollador preparado: redefine su rol y amplía su alcance.
+        </p>
+
+        <div class="faq">
+          <div class="faq-item reveal">
+            <button class="faq-question">
+              <span>¿La IA sustituirá a los desarrolladores web?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                La IA automatiza tareas, pero sigue siendo necesario diseñar soluciones, validar resultados,
+                desarrollar experiencias útiles, integrar sistemas y tomar decisiones técnicas.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">
+              <span>¿Necesito ser experto en matemáticas o machine learning?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                No necesariamente. Para muchas aplicaciones web con IA, lo más importante es saber integrar herramientas,
+                entender casos de uso, evaluar resultados y construir productos bien pensados.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">
+              <span>¿Qué tipo de proyectos tienen más salida profesional?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Asistentes internos, automatización de tareas, sistemas de recomendación, búsqueda inteligente,
+                generadores de contenido, paneles analíticos y herramientas SaaS con valor de negocio.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">
+              <span>¿Por dónde debería empezar?</span>
+              <span>+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Empieza por fortalecer HTML, CSS y JavaScript, luego trabaja con APIs y finalmente añade integración con IA
+                en pequeños proyectos funcionales y bien enfocados.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>© 2026 Futuro Web IA. Landing page estática sobre el futuro profesional del desarrollo web con IA.</p>
+      <div class="footer-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#vision">Visión</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#roadmap">Roadmap</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('show');
+      });
+    });
+
+    const faqButtons = document.querySelectorAll('.faq-question');
+
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector('span:last-child');
+        const isOpen = answer.style.maxHeight;
+
+        document.querySelectorAll('.faq-answer').forEach(item => {
+          item.style.maxHeight = null;
+        });
+
+        document.querySelectorAll('.faq-question span:last-child').forEach(i => {
+          i.textContent = '+';
+        });
+
+        if (!isOpen) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          icon.textContent = '−';
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
